@@ -9,18 +9,17 @@
         <script src="https://code.highcharts.com/modules/export-data.js"></script>
         <script src="https://code.highcharts.com/modules/accessibility.js"></script>
         <script src="https://code.highcharts.com/maps/highmaps.js"></script>
-<script src="https://code.highcharts.com/maps/modules/offline-exporting.js"></script>
-        <script src="/js/highstock.js"></script>
-        <script src="/js/highmaps.js"></script>
-        <script src="/js/highcharts.js"></script>
-        <script src="/js/modules/stock.js"></script>
-        <script src="/js/modules/map.js"></script>
-        <script src="/script.js" defer></script>
+        <script src="https://code.highcharts.com/maps/modules/offline-exporting.js"></script>
+        <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+        <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/maps/modules/map.js"></script>
         <link rel="stylesheet" href="/style.css">
         <script src="https://code.highcharts.com/highcharts.js"></script>
     </head>
 
     <body>
+
+
         <div id="container" style="width:100%; height:400px;"></div>
        <center> <p class="highcharts-description">
             A collection of indiscriminate rampages in public places resulting in four or more victims killed by the attacker. It excludes shootings stemming from more conventional crimes such as armed robbery or gang violence.
@@ -39,6 +38,10 @@
                 This pie chart shows the races of mass shooters in the United States
             </p></center>
         </figure>
+
+
+        <br><br><br><br>
+        <div id="container4" style="width:100%; height:500px;"></div>
 
     </body>
 
@@ -429,6 +432,76 @@ Highcharts.chart('container3', {
 });
 
 </script>
+
+<!-- Map chart -->
+<script>
+    (async () => {
+
+const topology = await fetch(
+    'https://code.highcharts.com/mapdata/countries/us/us-all.topo.json'
+).then(response => response.json());
+
+
+const data = [
+    ['us-ma', 7], ['us-wa', 106], ['us-ca', 401], ['us-or', 89],
+    ['us-wi', 53], ['us-me', 0], ['us-mi', 48], ['us-nv', 61],
+    ['us-nm', 0], ['us-co', 63], ['us-wy', 20], ['us-ks', 12],
+    ['us-ne', 5], ['us-ok', 20], ['us-mo', 609], ['us-il', 89],
+    ['us-in', 18], ['us-vt', 0], ['us-ar', 11], ['us-tx', 139],
+    ['us-ri', 0], ['us-al', 7], ['us-ms', 5], ['us-nc', 50],
+    ['us-va', 0], ['us-ia', 5], ['us-md', 59], ['us-de', 0],
+    ['us-pa', 51], ['us-nj', 12], ['us-ny', 58], ['us-id', 0],
+    ['us-sd', 0], ['us-ct', 169], ['us-nh', 0], ['us-ky', 8],
+    ['us-oh', 27], ['us-tn', 19], ['us-wv', 0], ['us-dc', 0],
+    ['us-la', 11], ['us-fl', 172], ['us-ga', 52], ['us-sc', 58],
+    ['us-mn', 46], ['us-mt', 0], ['us-nd', 0], ['us-az', 16],
+    ['us-ut', 3], ['us-hi', 8], ['us-ak', 0]
+];
+
+// Create the chart
+Highcharts.mapChart('container4', {
+    chart: {
+        map: topology
+    },
+
+    title: {
+        text: 'Map distribution of victims of mass shootings'
+    },
+
+    subtitle: {
+        text: 'Source map: <a href="http://code.highcharts.com/mapdata/countries/us/us-all.topo.json">United States of America</a>'
+    },
+
+    mapNavigation: {
+        enabled: true,
+        buttonOptions: {
+            verticalAlign: 'bottom'
+        }
+    },
+
+    colorAxis: {
+        min: 0
+    },
+
+    series: [{
+        data: data,
+        name: 'Victims',
+        states: {
+            hover: {
+                color: '#BADA55'
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            format: '{point.name}'
+        }
+    }]
+});
+
+})();
+
+</script>
+
 </html>
 
 

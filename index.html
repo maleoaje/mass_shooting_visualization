@@ -8,6 +8,8 @@
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
         <script src="https://code.highcharts.com/modules/export-data.js"></script>
         <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+        <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+<script src="https://code.highcharts.com/maps/modules/offline-exporting.js"></script>
         <script src="/js/highstock.js"></script>
         <script src="/js/highmaps.js"></script>
         <script src="/js/highcharts.js"></script>
@@ -16,19 +18,80 @@
         <script src="/script.js" defer></script>
         <link rel="stylesheet" href="/style.css">
         <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script src="/js/highstock.js"></script>
-        <script src="/js/highmaps.js"></script>
-        <script src="/js/highcharts.js"></script>
-        <script src="/js/modules/stock.js"></script>
-        <script src="/js/modules/map.js"></script>
     </head>
+
     <body>
         <div id="container" style="width:100%; height:400px;"></div>
        <center> <p class="highcharts-description">
             A collection of indiscriminate rampages in public places resulting in four or more victims killed by the attacker. It excludes shootings stemming from more conventional crimes such as armed robbery or gang violence.
         </p></center>
-       
+       <br><br><br><br>
+        <figure class="highcharts-figure">
+            <div id="container2"></div>
+            <center><p class="highcharts-description2">
+                This pie chart shows the gender disparity of mass shooters, from the pie chart you can see most of the perpetrator are male.
+            </p></center>
+        </figure>
+        <br><br><br><br>
+        <figure class="highcharts-figure3">
+            <div id="container3"></div>
+            <center><p class="highcharts-description">
+                This pie chart shows the races of mass shooters in the United States
+            </p></center>
+        </figure>
+
     </body>
+
+    <!-- gender pie chart -->
+<script>
+    Highcharts.chart('container2', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Gender ratio of Mass shooters'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+        point: {
+            valueSuffix: '%'
+        }
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true
+        }
+    },
+    series: [{
+        name: 'Gender',
+        colorByPoint: true,
+        data: [{
+            name: 'Male (128)',
+            y: 96.2,
+            sliced: true,
+            selected: true
+        },  {
+            name: 'Female (3)',
+            y: 2.3
+        },  {
+            name: 'Male & Female (2)',
+            y: 1.5
+        }, ]
+    }]
+});
+</script>
+
+<!-- Clickable Bar chart -->
     <script>document.addEventListener('DOMContentLoaded', function () {
         Highcharts.chart('container', {
     chart: {
@@ -301,6 +364,71 @@
     }
 });
     });</script>
+
+
+<!-- Race Pie Chart -->
+
+<script>
+    // Data retrieved from https://netmarketshare.com/
+// Build the chart
+Highcharts.chart('container3', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Race ratio of Mass shooters'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+        point: {
+            valueSuffix: '%'
+        }
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true
+        }
+    },
+    series: [{
+        name: 'Race',
+        colorByPoint: true,
+        data: [{
+            name: 'Asain',
+            y: 6,
+            sliced: true,
+            selected: true
+        },  {
+            name: 'Black',
+            y: 16.5
+        },  {
+            name: 'Latino',
+            y: 8.3
+        }, 
+         {
+            name: 'Native American',
+            y: 8.3
+        },  {
+            name: 'Other',
+            y: 8.3
+        },  {
+            name: 'Unclear',
+            y: 8.3
+        },  
+        ]
+    }]
+});
+
+</script>
 </html>
 
 
